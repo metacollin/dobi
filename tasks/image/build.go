@@ -186,6 +186,6 @@ func getBuildContext(config *config.ImageConfig) (io.Reader, string, error) {
 	if err != nil {
 		return nil, "", err
 	}
-	dockerfileCtx := ioutil.NopCloser(strings.NewReader(config.Steps))
+	dockerfileCtx := ioutil.NopCloser(strings.NewReader(strings.Replace(config.Steps, "\n", "\r\n", -1))
 	return build.AddDockerfileToBuildContext(dockerfileCtx, buildCtx)
 }
